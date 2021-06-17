@@ -81,7 +81,7 @@ bool flg_wait_connected = false;
 
 void send_str_if_flg_open_connect(char * str)
 {
-	if(flg_wait_connected)
+	if (flg_wait_connected)
 		sendstring(str);
 }
 
