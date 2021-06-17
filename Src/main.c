@@ -133,17 +133,11 @@ int main(void)
 	send_str_if_flg_open_connect("key is ready\n\r");
 	wait_time_and_listen(1);	
 			
-	if(value_key == ERASED_MEMORY)
-	{
+	if (ERASED_MEMORY == value_key) {
 		send_str_if_flg_open_connect("firmware not detected. wait firmware\n\r");
-		while(1)
-		{
+		while (1)
 			MX_LWIP_Process();
-		}
-	}
-	
-	else if(value_key == KEY_VALUE)
-	{
+	} else if (KEY_VALUE == value_key) {
 		send_str_if_flg_open_connect("firmware detected. starting firmware\n\r");
 		wait_time_and_listen(15);
 		jump_address = *(__IO uint32_t *)(USER_FLASH_FIRST_PAGE_ADDRESS + 4);
@@ -225,8 +219,7 @@ void SystemClock_Config(void)
 void wait_time_and_listen(uint8_t sec)
 {
 	HAL_TIM_Base_Start_IT(&htim6);
-	while(tim6_tick <= sec)
-	{
+	while(tim6_tick <= sec) {
 		MX_LWIP_Process();
 	}
 	HAL_TIM_Base_Stop_IT(&htim6);
